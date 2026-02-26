@@ -74,3 +74,8 @@ replay_pid*
 .project
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
+
+# Database files
+data/
+*.mv.db
+*.trace.db

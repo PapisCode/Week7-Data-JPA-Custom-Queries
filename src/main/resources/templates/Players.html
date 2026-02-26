@@ -9,34 +9,58 @@
 <nav th:replace="fragments/navbar :: navbar"></nav>
 
 <div class="app-container">
-    <div class="app-header text-center">
+    <div class="app-header text-center" style="margin-bottom: 30px;">
         <h2>Players</h2>
         <p class="text-muted">Showing <span th:text="${total}">0</span> players</p>
     </div>
 
-    <div class="players-card">
+    <div class="players-card" style="background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); overflow: hidden;">
+        <div style="padding: 20px; border-bottom: 1px solid #e0e0e0; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <label for="entries-per-page" style="margin-right: 10px; font-size: 14px;">Entries per page:</label>
+                <select id="entries-per-page" style="padding: 5px; border: 1px solid #ddd; border-radius: 4px; cursor: pointer;">
+                    <option>10</option>
+                    <option>25</option>
+                    <option>50</option>
+                </select>
+            </div>
+            <div>
+                <input type="text" id="search-input" placeholder="Search:" style="padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px; width: 200px;">
+            </div>
+        </div>
+
         <div class="table-responsive">
-            <table class="table align-middle">
-                <thead>
+            <table class="table align-middle" style="margin-bottom: 0;">
+                <thead style="background-color: #f5f5f5; border-bottom: 2px solid #ddd;">
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Status</th>
+                    <th scope="col" style="padding: 15px; text-align: left; font-weight: 600; color: #333; cursor: pointer;">Name
+                        <span style="font-size: 12px; color: #999;">▴</span>
+                    </th>
+                    <th scope="col" style="padding: 15px; text-align: left; font-weight: 600; color: #333; cursor: pointer;">Email
+                        <span style="font-size: 12px; color: #999;">⇅</span>
+                    </th>
+                    <th scope="col" style="padding: 15px; text-align: left; font-weight: 600; color: #333;">ID</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="player,itr : ${players}">
-                    <th scope="row" th:text="${itr.count}">1</th>
-                    <td th:text="${player.name}">Name</td>
-                    <td th:text="${player.email}">email@example.com</td>
-                    <td>
-                        <span th:if="${player.id == 1}" class="status-badge-online">Online</span>
-                        <span th:unless="${player.id == 1}" class="status-badge-offline">Offline</span>
-                    </td>
+                <tr th:each="player : ${players}" style="border-bottom: 1px solid #eee; transition: background-color 0.2s;">
+                    <td style="padding: 15px; color: #0066cc; cursor: pointer; text-decoration: none;" th:text="${player.name}">John Doe</td>
+                    <td style="padding: 15px; color: #666;" th:text="${player.email}">john@example.com</td>
+                    <td style="padding: 15px; color: #999; font-size: 14px;" th:text="${player.id}">1</td>
                 </tr>
                 </tbody>
             </table>
+        </div>
+
+        <div style="padding: 15px 20px; border-top: 1px solid #e0e0e0; display: flex; justify-content: space-between; align-items: center; font-size: 14px; color: #666;">
+            <span id="showing-info">Showing 1 to 10 of <span th:text="${total}">100</span> entries</span>
+            <div style="display: flex; gap: 5px;">
+                <button style="padding: 6px 10px; border: 1px solid #ddd; background: white; cursor: pointer; border-radius: 4px; font-size: 12px;">‹</button>
+                <button style="padding: 6px 10px; border: 1px solid #007bff; background: #007bff; color: white; cursor: pointer; border-radius: 4px; font-size: 12px;">1</button>
+                <button style="padding: 6px 10px; border: 1px solid #ddd; background: white; cursor: pointer; border-radius: 4px; font-size: 12px;">2</button>
+                <button style="padding: 6px 10px; border: 1px solid #ddd; background: white; cursor: pointer; border-radius: 4px; font-size: 12px;">›</button>
+                <button style="padding: 6px 10px; border: 1px solid #ddd; background: white; cursor: pointer; border-radius: 4px; font-size: 12px;">»</button>
+            </div>
         </div>
     </div>
 </div>
