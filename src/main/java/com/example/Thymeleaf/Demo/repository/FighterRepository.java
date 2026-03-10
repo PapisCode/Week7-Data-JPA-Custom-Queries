@@ -12,11 +12,11 @@ public interface FighterRepository extends JpaRepository<Fighter, Integer> {
 
     Page<Fighter> findByNameContainingIgnoreCase(String name, Pageable pageable);
 
-    Page<Fighter> findByHealthGreaterThan(int health, Pageable pageable);
+    Page<Fighter> findByHealthGreaterThan(Integer health, Pageable pageable);
 
     @Query("SELECT f FROM Fighter f ORDER BY f.damage DESC")
     Page<Fighter> findStrongestFighters(Pageable pageable);
 
     @Query("SELECT f FROM Fighter f WHERE f.health >= ?1 AND f.damage <= ?2 ORDER BY f.resistance DESC")
-    Page<Fighter> findBalancedFighters(double minHealth, double maxDamage, Pageable pageable);
+    Page<Fighter> findBalancedFighters(Integer minHealth, Double maxDamage, Pageable pageable);
 }
